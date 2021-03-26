@@ -1,0 +1,21 @@
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip {
+  animation: flip .8s forwards ease;
+}
+
+@keyframes flip {
+  0% {
+    transfrom: rotateY(0)
+  }
+
+  50% {
+    transfrom: rotateY(90deg)
+  }
+
+  100% {
+    transfrom: rotateY(180deg)
+  }
+}

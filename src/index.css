@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  overflow-x: hidden;
+  width: 100vw;
+  font-family: 'Exo 2', 'Vazir', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+code {
+  font-family: 'Exo 2', 'Vazir', sans-serif;
+}

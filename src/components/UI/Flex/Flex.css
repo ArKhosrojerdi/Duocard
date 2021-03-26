@@ -1,0 +1,55 @@
+.align-center {
+  align-items: center;
+}
+
+.align-stretch {
+  align-items: stretch;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.content-between {
+  align-content: space-between;
+}
+
+.row {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.m-1 {
+  margin: .5rem;
+}
+
+.m-2 {
+  margin: .75rem;
+}
+
+.m-3 {
+  margin: 1rem;
+}
+
+.m-4 {
+  margin: 1.5rem;
+}
+
+.m-5 {
+  margin: 2.5rem;
+}
+
+@media screen and (max-width: 992px) {
+}
+
+@media only screen and (max-width: 768px) {
+}
