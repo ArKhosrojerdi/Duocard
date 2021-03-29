@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   title: {
     margin: theme.spacing(1),
     color: "#e3f2fd",
-  }
+  },
 }));
 
 function Header() {

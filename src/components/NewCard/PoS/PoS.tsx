@@ -6,7 +6,7 @@ import {
 } from "@material-ui/core";
 import MuiSelect from "@material-ui/core/Select";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import * as WORD_TYPES from "../../../store/WordTypes/WordTypes";
+import * as WORD_TYPES from "../../../types/WordTypes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,7 +27,7 @@ type WordTypeProps = {
   posHandler: any;
 }
 
-function WordType(props: WordTypeProps) {
+function PoS(props: WordTypeProps) {
   const classes = useStyles();
 
   return (
@@ -54,4 +54,4 @@ function WordType(props: WordTypeProps) {
   );
 }
 
-export default WordType;
+export default PoS;

@@ -6,6 +6,8 @@ import {
 } from "@material-ui/core";
 import MuiSelect from "@material-ui/core/Select";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+import {IRootState} from "../../../store";
+import {connect} from "react-redux";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,25 +24,24 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Lang = {
   id: number;
-  ln: string;
+  name: string;
 }
 
-type LanguageProps = {
-  langHandler?: any;
-  lang?: number;
-  langs?: Lang[];
+type Props = IRootState & {
+  langHandler: any;
+  lang: number;
   error: boolean;
 }
 
-function Languages(props: LanguageProps) {
+function Languages(props: Props) {
   const classes = useStyles();
 
-  const langs = (
-    props.langs ?
-      props.langs.map((lang: Lang) =>
+  const languages = (
+    props.languages ?
+      props.languages.map((lang: Lang) =>
         <MenuItem
           key={lang.id}
-          value={lang.id}>{lang.ln}
+          value={lang.id}>{lang.name}
         </MenuItem>
       )
       : null
@@ -56,10 +57,12 @@ function Languages(props: LanguageProps) {
         onChange={props.langHandler}
         label="Language"
       >
-        {langs}
+        {languages}
       </MuiSelect>
     </FormControl>
   );
 }
 
-export default Languages;
+const mapStateToProps = (state: IRootState) => state;
+
+export default connect(mapStateToProps)(Languages);

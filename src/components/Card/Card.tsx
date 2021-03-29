@@ -7,12 +7,14 @@ import Typography from '@material-ui/core/Typography';
 import Grow from '@material-ui/core/Grow';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import {connect} from "react-redux";
-import type {Word} from "../../types/Word";
-import type {RootState} from "../../store";
+import type {IWord} from "../../types/Word";
+import type {IRootState} from "../../store";
+import {Constants} from "../../store/actions";
+import axios from "../../axios-cards";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
-    minWidth: 275,
+    // maxWidth: 275,
     boxShadow: "0 2px 6px rgba(127, 127, 127, .25)",
   },
   title: {
@@ -28,28 +30,17 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   text: {
     transition: `all .5s ${theme.transitions.easing.easeInOut}`,
   },
-  flipping: {
-    transition: `all 5s ${theme.transitions.easing.easeInOut}`,
-    animation: `$flipped .8s ${theme.transitions.easing.easeInOut}`,
-  },
-  "@keyframes flipped": {
-    "0%": {
-      transfrom: "rotateY(0)"
-    },
-    "50%": {
-      transfrom: "rotateY(90deg)"
-    },
-    "100%": {
-      transfrom: "rotateY(0)"
-    }
-  }
 }));
 
-const mapStateToProps = (state: RootState) => state;
+const mapStateToProps = (state: IRootState) => state;
 
-type MyProps = RootState & {
-  word: Word;
-  removeHandler: any;
+interface IMapActionsToProps {
+  setWords: (word: IWord[]) => any;
+}
+
+type MyProps = IRootState & IMapActionsToProps & {
+  word: IWord;
+  removeHandler?: any;
 }
 
 function Card(props: MyProps) {
@@ -63,10 +54,19 @@ function Card(props: MyProps) {
     }
   }
 
+  const removeHandler = (id: number) => {
+    const newWords = props.words.filter(word => word.id !== id);
+
+    props.setWords(newWords);
+    axios.post('/cards.json', newWords).then().catch(err => {
+      throw err;
+    });
+  }
+
   return (
     <Grow
       in={true}
-      style={{transformOrigin: '0 0 -16'}}
+      style={{transformOrigin: '0 0 16'}}
       {...({timeout: 800})}
     >
       <MuiCard className={classes.root} variant={"outlined"}>
@@ -112,7 +112,7 @@ function Card(props: MyProps) {
             color="secondary"
             size="small"
             onClick={() => {
-              props.removeHandler(props.word.id)
+              removeHandler(props.word.id)
             }}
           >
             Delete
@@ -123,4 +123,9 @@ function Card(props: MyProps) {
   );
 }
 
-export default connect(mapStateToProps)(Card);
+const mapActionsToProps = (dispatch: any) => ({
+  removeWord: (id: number) => dispatch({type: Constants.REMOVE_WORD, id: id}),
+  setWords: (words: IWord[]) => dispatch({type: Constants.SET_WORDS, payload: words}),
+});
+
+export default connect(mapStateToProps, mapActionsToProps)(Card);

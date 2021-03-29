@@ -1,3 +1,3 @@
-import {Word} from "../../types/Word";
+import {IWord} from "../../types/Word";
 
-export type WordsState = Word[];
+export type WordsState = IWord[];

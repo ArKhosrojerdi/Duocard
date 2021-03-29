@@ -1,33 +1,44 @@
 import React from 'react';
-import Grid from "../../components/UI/Grid/Grid";
-import Card from "../../components/Card/Card";
-import "./Cards.css";
-import type {Word} from "../../types/Word";
+import axios from "../../axios-cards";
 import {connect} from "react-redux";
-import type {RootState} from "../../store";
+import {Constants} from "../../store/actions";
+import type {IWord} from "../../types/Word";
+import type {IRootState} from "../../store";
+import Misc from "../../hoc/Misc/Misc";
+import Layout from "./Layout";
+import "./Cards.css";
+import {Typography} from "@material-ui/core";
 
+interface IMapActionsToProps {
+  setWords: (word: IWord[]) => any;
+}
 
-const mapStateToProps = (state: RootState) => state;
-
-type Props = RootState & {
-  removeHandler: any;
-};
+type Props = IRootState & IMapActionsToProps;
 
 class Cards extends React.Component<Props, {}> {
+  componentDidMount() {
+    axios.get('/cards.json')
+      .then(response => {
+        const res = response.data;
+        this.props.setWords(res[Object.keys(res)[Object.keys(res).length - 1]]);
+      })
+      .catch(() => this.props.setWords([]));
+  }
+
   render() {
-    console.log(this.props.words)
     return (
-      <Grid col={3}>
-        {this.props.words.map((word: Word, index: number) =>
-          <Card
-            key={index}
-            word={word}
-            removeHandler={this.props.removeHandler}
-          />
-        )}
-      </Grid>
-    );
+      <Misc>
+        <br/>
+        <Layout/>
+      </Misc>
+    )
   }
 }
 
-export default connect(mapStateToProps)(Cards);
+const mapStateToProps = (state: IRootState) => state;
+
+const mapActionsToProps = (dispatch: any) => ({
+  setWords: (words: IWord[]) => dispatch({type: Constants.SET_WORDS, payload: words}),
+});
+
+export default connect(mapStateToProps, mapActionsToProps)(Cards);

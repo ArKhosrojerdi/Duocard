@@ -10,11 +10,11 @@
   0% {
     transfrom: rotateY(0)
   }
-
+  
   50% {
     transfrom: rotateY(90deg)
   }
-
+  
   100% {
     transfrom: rotateY(180deg)
   }
