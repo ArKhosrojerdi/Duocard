@@ -14,7 +14,6 @@ import axios from "../../axios-cards";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
-    // maxWidth: 275,
     boxShadow: "0 2px 6px rgba(127, 127, 127, .25)",
   },
   title: {
@@ -30,6 +29,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   text: {
     transition: `all .5s ${theme.transitions.easing.easeInOut}`,
   },
+  pb0: {
+    paddingBottom: theme.spacing(0)
+  }
 }));
 
 const mapStateToProps = (state: IRootState) => state;
@@ -64,36 +66,31 @@ function Card(props: MyProps) {
   }
 
   return (
-    <Grow
-      in={true}
-      style={{transformOrigin: '0 0 16'}}
-      {...({timeout: 800})}
-    >
-      <MuiCard className={classes.root} variant={"outlined"}>
-        <CardContent>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-            {lang}
+    <MuiCard className={classes.root} variant={"outlined"}>
+      <CardContent>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+          {lang}
+        </Typography>
+        {side ?
+          <Typography
+            variant="h5"
+            component="h2"
+          >
+            {props.word.text}
           </Typography>
-          {side ?
-            <Typography
-              variant="h5"
-              component="h2"
-            >
-              {props.word.text}
-            </Typography>
-            :
-            <Typography
-              variant="h5"
-              component="h2"
-            >
-              {props.word.tran}
-            </Typography>
-          }
-          <Typography className={classes.pos} color="textSecondary">
-            {props.word.pos}
+          :
+          <Typography
+            variant="h5"
+            component="h2"
+          >
+            {props.word.tran}
           </Typography>
-        </CardContent>
-        <CardActions>
+        }
+        <Typography className={classes.pos} color="textSecondary">
+          {props.word.pos}
+        </Typography>
+
+        <CardActions className={classes.pb0}>
           <Button
             className={classes.flip}
             variant="outlined"
@@ -118,8 +115,8 @@ function Card(props: MyProps) {
             Delete
           </Button>
         </CardActions>
-      </MuiCard>
-    </Grow>
+      </CardContent>
+    </MuiCard>
   );
 }
 

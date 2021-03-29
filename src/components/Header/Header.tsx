@@ -9,10 +9,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     width: "100%",
     boxShadow: "0 4px 6px rgba()",
     backgroundColor: "#1e88e5",
-    marginBottom: theme.spacing(5)
+    marginBottom: theme.spacing(3)
   },
   title: {
-    margin: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     color: "#e3f2fd",
   },
 }));

@@ -5,9 +5,7 @@ import {Constants} from "../../store/actions";
 import type {IWord} from "../../types/Word";
 import type {IRootState} from "../../store";
 import Misc from "../../hoc/Misc/Misc";
-import Layout from "./Layout";
-import "./Cards.css";
-import {Typography} from "@material-ui/core";
+import Body from "./Body/Body";
 
 interface IMapActionsToProps {
   setWords: (word: IWord[]) => any;
@@ -29,7 +27,7 @@ class Cards extends React.Component<Props, {}> {
     return (
       <Misc>
         <br/>
-        <Layout/>
+        <Body/>
       </Misc>
     )
   }

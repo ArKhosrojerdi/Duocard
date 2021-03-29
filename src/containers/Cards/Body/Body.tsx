@@ -1,9 +1,13 @@
 import React from 'react';
+import {connect} from "react-redux";
 import {makeStyles, createStyles, Theme} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import {connect} from "react-redux";
-import Card from "../../components/Card/Card";
-import {IRootState} from "../../store";
+import Card from "../../../components/Card/Card";
+import type {IRootState} from "../../../store";
+import Grow from "@material-ui/core/Grow";
+import {
+  useParams
+} from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,17 +24,28 @@ type Props = IRootState & {
   removeWord?: (id: number) => any;
 };
 
-function Layout(props: Props) {
+type TParams = { id: string };
+
+function Body(props: Props) {
   const classes = useStyles();
+  const id = parseInt(useParams<TParams>().id, 10);
 
   const Cards = (
     props.words.map((word, index) => (
-      <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-        <Card
-          key={index}
-          word={word}
-        />
-      </Grid>
+      word.lang === id ?
+        <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+          <Grow
+            in={true}
+            style={{transformOrigin: '0 0 16'}}
+            {...({timeout: (index + 1) * 1000})}
+          >
+            <Card
+              key={index}
+              word={word}
+            />
+          </Grow>
+        </Grid>
+        : null
     ))
   );
 
@@ -47,4 +62,4 @@ function Layout(props: Props) {
 
 const mapStateToProps = (state: IRootState) => state;
 
-export default connect(mapStateToProps)(Layout);
+export default connect(mapStateToProps)(Body);

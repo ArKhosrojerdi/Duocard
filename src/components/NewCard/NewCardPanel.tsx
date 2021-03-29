@@ -125,47 +125,49 @@ function NewCardPanel(props: Props) {
   );
 
   return (
-    <MuiCard className={classes.root} variant={"outlined"}>
-      <CardContent>
-        <CardHeader
-          className={classes.header}
-          title="Add a new card"
-        />
-        <hr style={{
-          border: "none",
-          borderTop: "1px solid #e8e8e8"
-        }}/>
-        <br/>
-
-        <Flex direction="col">
-          <Settings
-            handlers={{lang: handleSetLang, pos: handleSetPos}}
-            errors={{lang: errors.lang, pos: errors.pos}}
-            values={{lang: lang, pos: pos}}
+    <Flex direction="col">
+      <MuiCard className={classes.root} variant={"outlined"}>
+        <CardContent>
+          <CardHeader
+            className={classes.header}
+            title="Add a new card"
           />
+          <hr style={{
+            border: "none",
+            borderTop: "1px solid #e8e8e8"
+          }}/>
           <br/>
-          <Flex direction="row" justify="center" gap={1}>
-            <Box
-              input={handleSetWord}
-              error={errors.text}
-              label="New Word"
-              placeholder="Enter your new word here..."
-            />
-            <Box
-              input={handleSetTranslation}
-              error={errors.tran}
-              label="Translation"
-              placeholder="Enter the translation here..."
-            />
-          </Flex>
-        </Flex>
-        <br/>
 
-        <CardActions className={classes.actions}>
-          {Add}
-        </CardActions>
-      </CardContent>
-    </MuiCard>
+          <Flex direction="col">
+            <Settings
+              handlers={{lang: handleSetLang, pos: handleSetPos}}
+              errors={{lang: errors.lang, pos: errors.pos}}
+              values={{lang: lang, pos: pos}}
+            />
+            <br/>
+            <Flex direction="row" justify="center" gap={1}>
+              <Box
+                input={handleSetWord}
+                error={errors.text}
+                label="New Word"
+                placeholder="Enter your new word here..."
+              />
+              <Box
+                input={handleSetTranslation}
+                error={errors.tran}
+                label="Translation"
+                placeholder="Enter the translation here..."
+              />
+            </Flex>
+          </Flex>
+          <br/>
+
+          <CardActions className={classes.actions}>
+            {Add}
+          </CardActions>
+        </CardContent>
+      </MuiCard>
+    </Flex>
   )
 }
 
