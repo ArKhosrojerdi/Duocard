@@ -10,11 +10,10 @@ import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import Box from './Box';
 import Settings from "./Settings/Settings";
-import {CardActions, CardContent, CardHeader, Container} from "@material-ui/core";
+import {CardActions, CardContent, CardHeader} from "@material-ui/core";
 import MuiCard from "@material-ui/core/Card";
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import axios from "../../axios-cards";
-import {throws} from "assert";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -25,6 +24,13 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   actions: {
     padding: 0
+  },
+  panel: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "calc(100vh - 10rem)"
   }
 }));
 
@@ -57,7 +63,7 @@ function NewCardPanel(props: Props) {
   });
   const [word, setWord] = useState<string>("");
   const [tran, setTran] = useState<string>(""); // Translation
-  const [lang, setLang] = useState<number>(0); // Language
+  const [lang, setLang] = useState<number>(0); // Library
   const [pos, setPos] = useState<string>(WORD_TYPES.NOUN);
 
   const handleSetWord = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -125,7 +131,7 @@ function NewCardPanel(props: Props) {
   );
 
   return (
-    <Flex direction="col">
+    <div className={classes.panel}>
       <MuiCard className={classes.root} variant={"outlined"}>
         <CardContent>
           <CardHeader
@@ -167,13 +173,12 @@ function NewCardPanel(props: Props) {
           </CardActions>
         </CardContent>
       </MuiCard>
-    </Flex>
+    </div>
   )
 }
 
 const mapActionsToProps = (dispatch: any) => ({
   setWords: (words: IWord[]) => dispatch({type: Constants.SET_WORDS, payload: words}),
-  addWord: (word: IWord) => dispatch({type: Constants.ADD_WORD, word: word})
 })
 
 export default connect(mapStateToProps, mapActionsToProps)(NewCardPanel);

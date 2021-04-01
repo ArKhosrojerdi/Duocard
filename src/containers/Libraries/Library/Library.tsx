@@ -1,9 +1,7 @@
 import React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import type {Language} from "../../../types/Language";
+import type {ILibrary} from "../../../types/Library";
 import {Typography} from "@material-ui/core";
-import styled from "styled-components";
-import {createMuiTheme} from "@material-ui/core";
 import MuiCard from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
@@ -42,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 );
 
 type Props = {
-  library: Language
+  library: ILibrary
 }
 
 function Library(props: Props) {

@@ -7,7 +7,7 @@ import {CardHeader} from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 300,
+    minWidth: 220,
     boxShadow: "0 2px 6px rgba(191, 191, 191, .65)",
   },
   title: {

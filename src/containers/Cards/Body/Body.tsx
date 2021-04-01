@@ -4,20 +4,20 @@ import {makeStyles, createStyles, Theme} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from "../../../components/Card/Card";
 import type {IRootState} from "../../../store";
-import Grow from "@material-ui/core/Grow";
 import {
   useParams
 } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    control: {
-      padding: theme.spacing(2),
-    },
-  }),
+      root: {
+        flexGrow: 1,
+      },
+      control: {
+        padding: theme.spacing(2),
+      },
+    }
+  )
 );
 
 type Props = IRootState & {
@@ -34,16 +34,10 @@ function Body(props: Props) {
     props.words.map((word, index) => (
       word.lang === id ?
         <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-          <Grow
-            in={true}
-            style={{transformOrigin: '0 0 16'}}
-            {...({timeout: (index + 1) * 1000})}
-          >
-            <Card
-              key={index}
-              word={word}
-            />
-          </Grow>
+          <Card
+            key={index}
+            word={word}
+          />
         </Grid>
         : null
     ))

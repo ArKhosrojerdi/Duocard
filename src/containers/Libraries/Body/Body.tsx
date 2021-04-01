@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import Library from "../Library/Library";
 import {Slide} from "@material-ui/core";
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 type Props = IRootState;
 
@@ -27,8 +27,9 @@ function Body(props: Props) {
   const classes = useStyles();
 
   const Libraries = (
-    props.languages.map((library, index) => (
+    props.libraries.map((library, index) => (
       <Slide
+        key={index}
         in={true}
         timeout={(index + 1) * 400}
         direction="left"
@@ -36,7 +37,6 @@ function Body(props: Props) {
         <Grid key={index} item xs={12} md={6}>
           <Link to={`/libraries/${index}`} className={classes.link}>
             <Library
-              key={index}
               library={library}
             />
           </Link>

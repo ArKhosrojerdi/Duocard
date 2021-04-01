@@ -1,18 +1,18 @@
 import {combineReducers, createStore} from 'redux';
 import {wordsReducer} from './Words/reducer';
-import {languagesReducer} from './Languages/reducer';
+import {librariesReducer} from './Libraries/reducer';
 import {WordsState} from './Words/state';
-import {LanguagesState} from './Languages/state';
+import {LibraryState} from './Libraries/state';
 
 export interface IRootState {
   words: WordsState;
-  languages: LanguagesState;
+  libraries: LibraryState;
 }
 
 const store = createStore<IRootState, any, any, any>(
   combineReducers({
     words: wordsReducer,
-    languages: languagesReducer
+    libraries: librariesReducer
   })
 );
 

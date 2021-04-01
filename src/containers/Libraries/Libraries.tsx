@@ -1,14 +1,14 @@
 import React from "react";
 import {connect} from "react-redux";
 import axios from "../../axios-cards";
-import type {Language} from "../../types/Language";
+import type {ILibrary} from "../../types/Library";
 import type {IRootState} from "../../store";
 import {Constants} from "../../store/actions";
 import Body from "./Body/Body";
 import Misc from "../../hoc/Misc/Misc";
 
 interface IMapActionsToProps {
-  setLibraries: (libraries: Language[]) => any;
+  setLibraries: (libraries: ILibrary[]) => any;
 }
 
 type Props = IRootState & IMapActionsToProps;
@@ -36,7 +36,7 @@ class Libraries extends React.Component<Props, {}> {
 const mapStateToProps = (state: IRootState) => state;
 
 const mapActionsToProps = (dispatch: any) => ({
-  setLibraries: (libraries: Language[]) => dispatch({type: Constants.SET_LIBRARIES, payload: libraries})
+  setLibraries: (libraries: ILibrary[]) => dispatch({type: Constants.SET_LIBRARIES, payload: libraries})
 })
 
 export default connect(mapStateToProps, mapActionsToProps)(Libraries);

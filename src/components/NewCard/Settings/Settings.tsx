@@ -1,6 +1,5 @@
-import Languages from "../Languages/Languages";
+import Libraries from "../Libraries/Libraries";
 import PoS from "../PoS/PoS";
-import Misc from "../../../hoc/Misc/Misc";
 import React from "react";
 import Flex from "../../UI/Flex/Flex";
 import "./Settings.css";
@@ -24,7 +23,7 @@ type Props = {
 function Settings(props: Props) {
   return (
     <Flex direction="row" justify="center" gap={1}>
-      <Languages
+      <Libraries
         error={props.errors.lang}
         langHandler={props.handlers.lang}
         lang={props.values.lang}

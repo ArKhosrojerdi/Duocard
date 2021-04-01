@@ -33,15 +33,17 @@ type Props = IRootState & {
   error: boolean;
 }
 
-function Languages(props: Props) {
+function Libraries(props: Props) {
   const classes = useStyles();
 
-  const languages = (
-    props.languages ?
-      props.languages.map((lang: Lang) =>
+  const libraries = (
+    props.libraries ?
+      props.libraries.map((lang: Lang, index) =>
         <MenuItem
-          key={lang.id}
-          value={lang.id}>{lang.name}
+          key={index}
+          value={lang.id}
+        >
+          {lang.name}
         </MenuItem>
       )
       : null
@@ -55,9 +57,9 @@ function Languages(props: Props) {
         id="demo-simple-select-outlined"
         value={props.lang}
         onChange={props.langHandler}
-        label="Language"
+        label="Library"
       >
-        {languages}
+        {libraries}
       </MuiSelect>
     </FormControl>
   );
@@ -65,4 +67,4 @@ function Languages(props: Props) {
 
 const mapStateToProps = (state: IRootState) => state;
 
-export default connect(mapStateToProps)(Languages);
+export default connect(mapStateToProps)(Libraries);
